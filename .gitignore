@@ -1,0 +1,13 @@
+# Python & derleme artıkları
+__pycache__/
+*.py[cod]
+build/
+install/
+log/
+
+# Sistem ve editör dosyaları
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
