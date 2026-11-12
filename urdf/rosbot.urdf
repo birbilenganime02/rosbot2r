@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.7.0-2-gd449896-dirty  Build Version: 1.6.9759.26913
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
@@ -85,7 +85,7 @@
     </collision>
   </link>
   <joint
-    name="join-BR"
+    name="joint-BR"
     type="continuous">
     <origin
       xyz="-0.070042 -0.14372 -0.0908"
@@ -271,7 +271,7 @@
       <right_joint>joint-BR</right_joint>
       <wheel_separation>0.302</wheel_separation>
       <wheel_diameter>0.085</wheel_diameter>
-      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_torque>100</max_wheel_torque>
       <max_wheel_acceleration>1.0</max_wheel_acceleration>
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
