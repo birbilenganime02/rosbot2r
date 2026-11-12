@@ -132,34 +132,24 @@
   </joint>
 
   <gazebo>
-    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
       <ros>
         <remapping>cmd_vel:=cmd_vel</remapping>
         <remapping>odom:=odom</remapping>
       </ros>
-      <update_rate>50</update_rate>
-      <num_wheel_pairs>2</num_wheel_pairs>
-      <left_joint>joint-FL</left_joint>
-      <left_joint>joint-BL</left_joint>
-      <right_joint>joint-FR</right_joint>
-      <right_joint>joint-BR</right_joint>
-      <wheel_separation>0.294</wheel_separation>
-      <wheel_diameter>0.085</wheel_diameter>
-      <max_wheel_torque>15</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <update_rate>100</update_rate>
+      <publish_rate>50</publish_rate>
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
       <odometry_frame>odom</odometry_frame>
       <robot_base_frame>base_link</robot_base_frame>
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
     </plugin>
   </gazebo>
 
-  <gazebo reference="Link-FL"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-FR"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-BL"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-BR"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-
+        
   <link name="rear_part">
     <visual>
       <origin xyz="-0.065 0.0 0.015" rpy="0 0 0" />
@@ -200,8 +190,8 @@
   </gazebo>
   <gazebo reference="rear_part"><material>Gazebo/Blue</material></gazebo>
   <gazebo reference="lidar_link"><material>Gazebo/FlatBlack</material></gazebo>
-  <gazebo reference="Link-FL"><material>Gazebo/FlatBlack</material></gazebo>
-  <gazebo reference="Link-FR"><material>Gazebo/FlatBlack</material></gazebo>
-  <gazebo reference="Link-BL"><material>Gazebo/FlatBlack</material></gazebo>
-  <gazebo reference="Link-BR"><material>Gazebo/FlatBlack</material></gazebo>
+  <gazebo reference="Link-FL"><material>Gazebo/FlatBlack</material><mu1>1.0</mu1><mu2>0.05</mu2></gazebo>
+  <gazebo reference="Link-FR"><material>Gazebo/FlatBlack</material><mu1>1.0</mu1><mu2>0.05</mu2></gazebo>
+  <gazebo reference="Link-BL"><material>Gazebo/FlatBlack</material><mu1>1.0</mu1><mu2>0.05</mu2></gazebo>
+  <gazebo reference="Link-BR"><material>Gazebo/FlatBlack</material><mu1>1.0</mu1><mu2>0.05</mu2></gazebo>
 </robot>
