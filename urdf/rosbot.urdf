@@ -2,7 +2,7 @@
 <robot name="ROSBOT2R">
   <link name="base_link">
     <inertial>
-      <origin xyz="0.015 0.0 -0.02" rpy="0 0 0" />
+      <origin xyz="0.015 0.0 0.0" rpy="0 0 0" />
       <mass value="3.5" />
       <inertia ixx="0.03" ixy="0.0" ixz="0.0" iyy="0.045" iyz="0.0" izz="0.055" />
     </inertial>
@@ -25,7 +25,7 @@
 
   <link name="Link-BR">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <mass value="0.5" />
       <inertia ixx="0.0007" ixy="0" ixz="0" iyy="0.0012" iyz="0" izz="0.0007" />
     </inertial>
@@ -39,7 +39,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="1.5708 0 0" />
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.0505" length="0.035" />
       </geometry>
     </collision>
   </link>
@@ -52,7 +52,7 @@
 
   <link name="Link-FR">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <mass value="0.5" />
       <inertia ixx="0.0007" ixy="0" ixz="0" iyy="0.0012" iyz="0" izz="0.0007" />
     </inertial>
@@ -66,7 +66,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="1.5708 0 0" />
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.0505" length="0.035" />
       </geometry>
     </collision>
   </link>
@@ -79,7 +79,7 @@
 
   <link name="Link-BL">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <mass value="0.5" />
       <inertia ixx="0.0007" ixy="0" ixz="0" iyy="0.0012" iyz="0" izz="0.0007" />
     </inertial>
@@ -93,7 +93,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="1.5708 0 0" />
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.0505" length="0.035" />
       </geometry>
     </collision>
   </link>
@@ -106,7 +106,7 @@
 
   <link name="Link-FL">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <mass value="0.5" />
       <inertia ixx="0.0007" ixy="0" ixz="0" iyy="0.0012" iyz="0" izz="0.0007" />
     </inertial>
@@ -120,7 +120,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="1.5708 0 0" />
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.0505" length="0.035" />
       </geometry>
     </collision>
   </link>
@@ -131,22 +131,44 @@
     <axis xyz="0 1 0" />
   </joint>
 
+  
+  <link name="rear_part">
+    <visual>
+      <origin xyz="-0.065 0.0 0.015" rpy="0 0 0" />
+      <geometry>
+        <box size="0.09 0.165 0.065" />
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_rear_part" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="rear_part" />
+  </joint>
+
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0.035 0.0 0.055" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.0505" length="0.03" />
+      </geometry>
+    </visual>
+  </link>
+  <joint name="joint_lidar" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar_link" />
+  </joint>
+
   <gazebo>
     <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-      <ros>
-        <remapping>cmd_vel:=cmd_vel</remapping>
-        <remapping>odom:=odom</remapping>
-      </ros>
-      <update_rate>50</update_rate>
-      <num_wheel_pairs>2</num_wheel_pairs>
-      <left_joint>joint-FL</left_joint>
+      <num_wheel_pairs>1</num_wheel_pairs>
       <left_joint>joint-BL</left_joint>
-      <right_joint>joint-FR</right_joint>
       <right_joint>joint-BR</right_joint>
       <wheel_separation>0.294</wheel_separation>
-      <wheel_diameter>0.085</wheel_diameter>
-      <max_wheel_torque>15</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <wheel_diameter>0.104</wheel_diameter>
+      <max_wheel_torque>10.0</max_wheel_torque>
+      <max_wheel_acceleration>2.0</max_wheel_acceleration>
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
       <publish_wheel_tf>true</publish_wheel_tf>
@@ -155,8 +177,36 @@
     </plugin>
   </gazebo>
 
-  <gazebo reference="Link-FL"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-FR"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-BL"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
-  <gazebo reference="Link-BR"><mu1>1.0</mu1><mu2>0.1</mu2></gazebo>
+  <gazebo reference="base_link"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="rear_part">
+    <visual>
+      <material>
+        <ambient>0.96 0.92 0.80 1</ambient>
+        <diffuse>0.96 0.92 0.80 1</diffuse>
+        <specular>0.1 0.1 0.1 1</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="lidar_link"><material>Gazebo/FlatBlack</material></gazebo>
+
+  <gazebo reference="Link-FL">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+  </gazebo>
+  <gazebo reference="Link-FR">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+  </gazebo>
+  <gazebo reference="Link-BL">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+  <gazebo reference="Link-BR">
+    <material>Gazebo/FlatBlack</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
 </robot>
