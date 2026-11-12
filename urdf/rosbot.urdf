@@ -1,179 +1,278 @@
-
-<robot name="ROSBOT2R">
-  <link name="base_link">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.7.0-2-gd449896-dirty  Build Version: 1.6.9759.26913
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="ROSBOT2R">
+  <link
+    name="base_link">
     <inertial>
-      <origin xyz="0.0192013393911094 -0.000455110371055135 -0.031631129247269" rpy="0 0 0" />
-      <mass value="3.46984436528789" />
-      <inertia ixx="0.0315048501191694" ixy="2.50127903988809E-05" ixz="0.00494631670208088" iyy="0.0454185425035253" iyz="-1.33554735687402E-07" izz="0.0559010400223417" />
+      <origin
+        xyz="0.0192013393911094 -0.000455110371055135 -0.031631129247269"
+        rpy="0 0 0" />
+      <mass
+        value="3.46984436528789" />
+      <inertia
+        ixx="0.0315048501191694"
+        ixy="2.50127903988809E-05"
+        ixz="0.00494631670208088"
+        iyy="0.0454185425035253"
+        iyz="-1.33554735687402E-07"
+        izz="0.0559010400223417" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://rosbot2r/meshes/base_link.STL" scale="1.0 1.0 1.0"/>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/base_link.STL" />
       </geometry>
-      <material name="blue">
-        <color rgba="0.2 0.6 1 1" />
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <box size="0.3 0.2 0.1" />
+        <mesh
+          filename="file:///root/rosbot2r/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
-
-  <gazebo reference="base_link">
-    <material>Gazebo/Blue</material>
-  </gazebo>
-
-  <link name="Link-BR">
+  <link
+    name="Link-BR">
     <inertial>
-      <origin xyz="-0.00025258 0.0051982 -0.00020863" rpy="0 0 0" />
-      <mass value="0.50593" />
-      <inertia ixx="0.0007657" ixy="1.6764E-07" ixz="8.143E-08" iyy="0.0011883" iyz="4.5655E-07" izz="0.00076708" />
+      <origin
+        xyz="-0.00025258 0.0051982 -0.00020863"
+        rpy="0 0 0" />
+      <mass
+        value="0.50593" />
+      <inertia
+        ixx="0.0007657"
+        ixy="1.6764E-07"
+        ixz="8.143E-08"
+        iyy="0.0011883"
+        iyz="4.5655E-07"
+        izz="0.00076708" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-BR.STL" scale="1.0 1.0 1.0"/>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-BR.STL" />
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1" />
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-BR.STL" scale="1.0 1.0 1.0"/>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-BR.STL" />
       </geometry>
     </collision>
   </link>
-  <gazebo reference="Link-BR">
-    <material>Gazebo/FlatBlack</material>
-    <mu1>100.0</mu1>
-    <mu2>100.0</mu2>
-  </gazebo>
-  <joint name="join-BR" type="continuous">
-    <origin xyz="-0.070042 -0.14372 -0.0908" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="Link-BR" />
-    <axis xyz="0 1 0" />
+  <joint
+    name="join-BR"
+    type="continuous">
+    <origin
+      xyz="-0.070042 -0.14372 -0.0908"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link-BR" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Link-FR">
+    <inertial>
+      <origin
+        xyz="-8.1344E-06 0.0051982 0.0003275"
+        rpy="0 0 0" />
+      <mass
+        value="0.50593" />
+      <inertia
+        ixx="0.00076663"
+        ixy="2.5559E-07"
+        ixz="6.537E-07"
+        iyy="0.0011883"
+        iyz="-4.1378E-07"
+        izz="0.00076615" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-FR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-FR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint-FR"
+    type="continuous">
+    <origin
+      xyz="0.099958 -0.14372 -0.0908"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link-FR" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Link-BL">
+    <inertial>
+      <origin
+        xyz="-0.0003071 -0.0051982 -0.00011407"
+        rpy="0 0 0" />
+      <mass
+        value="0.50593" />
+      <inertia
+        ixx="0.00076666"
+        ixy="-4.7911E-07"
+        ixz="6.4138E-07"
+        iyy="0.0011883"
+        iyz="8.3656E-08"
+        izz="0.00076612" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-BL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-BL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint-BL"
+    type="continuous">
+    <origin
+      xyz="-0.070042 0.14371 -0.0908"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link-BL" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="Link-FL">
+    <inertial>
+      <origin
+        xyz="-9.0448E-05 -0.012709 0.00031487"
+        rpy="0 0 0" />
+      <mass
+        value="0.50593" />
+      <inertia
+        ixx="0.00076622"
+        ixy="1.1975E-07"
+        ixz="-6.755E-07"
+        iyy="0.0011883"
+        iyz="4.7138E-07"
+        izz="0.00076656" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-FL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file:///root/rosbot2r/meshes/Link-FL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint-FL"
+    type="continuous">
+    <origin
+      xyz="0.099958 0.15122 -0.0908"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link-FL" />
+    <axis
+      xyz="0 1 0" />
   </joint>
 
-  <link name="Link-FR">
-    <inertial>
-      <origin xyz="-8.1344E-06 0.0051982 0.0003275" rpy="0 0 0" />
-      <mass value="0.50593" />
-      <inertia ixx="0.00076663" ixy="2.5559E-07" ixz="6.537E-07" iyy="0.0011883" iyz="-4.1378E-07" izz="0.00076615" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-FR.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-FR.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="Link-FR">
-    <material>Gazebo/FlatBlack</material>
-    <mu1>100.0</mu1>
-    <mu2>100.0</mu2>
-  </gazebo>
-  <joint name="joint-FR" type="continuous">
-    <origin xyz="0.099958 -0.14372 -0.0908" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="Link-FR" />
-    <axis xyz="0 1 0" />
-  </joint>
-
-  <link name="Link-BL">
-    <inertial>
-      <origin xyz="-0.0003071 -0.0051982 -0.00011407" rpy="0 0 0" />
-      <mass value="0.50593" />
-      <inertia ixx="0.00076666" ixy="-4.7911E-07" ixz="6.4138E-07" iyy="0.0011883" iyz="8.3656E-08" izz="0.00076612" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-BL.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-BL.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="Link-BL">
-    <material>Gazebo/FlatBlack</material>
-    <mu1>100.0</mu1>
-    <mu2>100.0</mu2>
-  </gazebo>
-  <joint name="joint-BL" type="continuous">
-    <origin xyz="-0.070042 0.14371 -0.0908" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="Link-BL" />
-    <axis xyz="0 1 0" />
-  </joint>
-
-  <link name="Link-FL">
-    <inertial>
-      <origin xyz="-9.0448E-05 -0.012709 0.00031487" rpy="0 0 0" />
-      <mass value="0.50593" />
-      <inertia ixx="0.00076622" ixy="1.1975E-07" ixz="-6.755E-07" iyy="0.0011883" iyz="4.7138E-07" izz="0.00076656" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-FL.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://rosbot2r/meshes/Link-FL.STL" scale="1.0 1.0 1.0"/>
-      </geometry>
-    </collision>
-  </link>
-  <gazebo reference="Link-FL">
-    <material>Gazebo/FlatBlack</material>
-    <mu1>100.0</mu1>
-    <mu2>100.0</mu2>
-  </gazebo>
-  <joint name="joint-FL" type="continuous">
-    <origin xyz="0.099958 0.15122 -0.0908" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="Link-FL" />
-    <axis xyz="0 1 0" />
-  </joint>
-
-  <!-- Gazebo Differential Drive Plugin -->
   <gazebo>
-    <plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="skid_steer_drive" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
       <update_rate>50</update_rate>
+      <num_wheel_pairs>2</num_wheel_pairs>
+      <left_joint>joint-FL</left_joint>
       <left_joint>joint-BL</left_joint>
-      <right_joint>join-BR</right_joint>
-      <wheel_separation>0.3</wheel_separation>
-      <wheel_diameter>0.1</wheel_diameter>
+      <right_joint>joint-FR</right_joint>
+      <right_joint>joint-BR</right_joint>
+      <wheel_separation>0.302</wheel_separation>
+      <wheel_diameter>0.085</wheel_diameter>
       <max_wheel_torque>20</max_wheel_torque>
       <max_wheel_acceleration>1.0</max_wheel_acceleration>
-      <command_topic>cmd_vel</command_topic>
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
       <publish_wheel_tf>true</publish_wheel_tf>
