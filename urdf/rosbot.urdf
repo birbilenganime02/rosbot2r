@@ -36,10 +36,10 @@
       </geometry>
       <material name=""><color rgba="1 1 1 1" /></material>
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+        <collision>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.085" length="0.036"/>
       </geometry>
     </collision>
   </link>
@@ -63,10 +63,10 @@
       </geometry>
       <material name=""><color rgba="1 1 1 1" /></material>
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+        <collision>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.085" length="0.036"/>
       </geometry>
     </collision>
   </link>
@@ -90,10 +90,10 @@
       </geometry>
       <material name=""><color rgba="1 1 1 1" /></material>
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+        <collision>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.085" length="0.036"/>
       </geometry>
     </collision>
   </link>
@@ -117,10 +117,10 @@
       </geometry>
       <material name=""><color rgba="1 1 1 1" /></material>
     </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+        <collision>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
       <geometry>
-        <cylinder radius="0.0425" length="0.035" />
+        <cylinder radius="0.085" length="0.036"/>
       </geometry>
     </collision>
   </link>
