@@ -4,74 +4,1671 @@
     <include><uri>model://ground_plane</uri></include>
     <include><uri>model://sun</uri></include>
 
-    <model name="kalabalik_insanlar">
-      <static>true</static>
+  <!-- AYDINLIK KORIDOR ISIKLANDIRMASI -->
+  <scene>
+    <ambient>0.72 0.72 0.74 1</ambient>
+    <background>0.86 0.88 0.91 1</background>
+    <shadows>false</shadows>
+  </scene>
+  <gui fullscreen='0'>
+    <camera name='user_camera'>
+      <pose>-14.5 0.0 6.5 0.0 0.42 0.0</pose>
+      <view_controller>orbit</view_controller>
+      <projection_type>perspective</projection_type>
+    </camera>
+  </gui>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 1. İNSAN (Kırmızı T-shirt - Karşıda 2m) -->
-      <link name="insan_1_govde">
-        <pose>2.0 0.0 0.85 0 0 0</pose>
-        <collision name="c1"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v1"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.8 0.1 0.1 1</diffuse></material></visual>
-      </link>
-      <link name="insan_1_bas">
-        <pose>2.0 0.0 1.5 0 0 0</pose>
-        <visual name="vb1"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
+  <!-- GENISLETILMIS UZUN KORIDOR ZEMINI (24m x 5.0m) -->
+  <model name="koridor_zemini">
+    <static>true</static>
+    <pose>0 0 0.023 0 0 0</pose>
+    <link name="link">
+      <collision name="zemin_col">
+        <geometry><box><size>24.0 5.0 0.046</size></box></geometry>
+      </collision>
+      <visual name="zemin">
+        <geometry><box><size>24.0 5.0 0.046</size></box></geometry>
+        <material>
+          <ambient>0.85 0.80 0.70 1</ambient>
+          <diffuse>0.94 0.89 0.78 1</diffuse>
+          <specular>0.35 0.35 0.35 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 2. İNSAN (Mavi T-shirt - Sol Çapraz) -->
-      <link name="insan_2_govde">
-        <pose>1.8 1.5 0.85 0 0 0</pose>
-        <collision name="c2"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v2"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.1 0.2 0.8 1</ambient><diffuse>0.1 0.2 0.8 1</diffuse></material></visual>
-      </link>
-      <link name="insan_2_bas">
-        <pose>1.8 1.5 1.5 0 0 0</pose>
-        <visual name="vb2"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
+  <!-- KORIDOR ORTA KILAVUZ SERIDI -->
+  <model name="koridor_serit">
+    <static>true</static>
+    <pose>0 0 0.048 0 0 0</pose>
+    <link name="link">
+      <visual name="orta_serit">
+        <geometry><box><size>23.6 1.20 0.0008</size></box></geometry>
+        <material>
+          <ambient>0.22 0.30 0.42 1</ambient>
+          <diffuse>0.28 0.38 0.52 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 3. İNSAN (Yeşil T-shirt - Sağ Çapraz) -->
-      <link name="insan_3_govde">
-        <pose>1.8 -1.5 0.85 0 0 0</pose>
-        <collision name="c3"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v3"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.1 0.7 0.2 1</ambient><diffuse>0.1 0.7 0.2 1</diffuse></material></visual>
-      </link>
-      <link name="insan_3_bas">
-        <pose>1.8 -1.5 1.5 0 0 0</pose>
-        <visual name="vb3"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
+  <!-- KORIDOR FAYANS DERZ CIZGILERI (1m aralikli) -->
+  <model name="koridor_derzleri">
+    <static>true</static>
+    <pose>0 0 0.047 0 0 0</pose>
+    <link name="link">
+      <visual name="x_1">
+        <pose>-11 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_2">
+        <pose>-10 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_3">
+        <pose>-9 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_4">
+        <pose>-8 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_5">
+        <pose>-7 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_6">
+        <pose>-6 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_7">
+        <pose>-5 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_8">
+        <pose>-4 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_9">
+        <pose>-3 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_10">
+        <pose>-2 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_11">
+        <pose>-1 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_12">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_13">
+        <pose>1 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_14">
+        <pose>2 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_15">
+        <pose>3 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_16">
+        <pose>4 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_17">
+        <pose>5 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_18">
+        <pose>6 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_19">
+        <pose>7 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_20">
+        <pose>8 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_21">
+        <pose>9 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_22">
+        <pose>10 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="x_23">
+        <pose>11 0 0 0 0 0</pose>
+        <geometry><box><size>0.015 5.0 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="y_1">
+        <pose>0 -1.5 0 0 0 0</pose>
+        <geometry><box><size>24.0 0.015 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="y_2">
+        <pose>0 -0.5 0 0 0 0</pose>
+        <geometry><box><size>24.0 0.015 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="y_3">
+        <pose>0 0.5 0 0 0 0</pose>
+        <geometry><box><size>24.0 0.015 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+      <visual name="y_4">
+        <pose>0 1.5 0 0 0 0</pose>
+        <geometry><box><size>24.0 0.015 0.0005</size></box></geometry>
+        <material><ambient>0.68 0.63 0.54 1</ambient><diffuse>0.76 0.71 0.61 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 4. İNSAN (Sarı T-shirt - İleri Sol) -->
-      <link name="insan_4_govde">
-        <pose>3.5 1.0 0.85 0 0 0</pose>
-        <collision name="c4"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v4"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.9 0.8 0.1 1</ambient><diffuse>0.9 0.8 0.1 1</diffuse></material></visual>
-      </link>
-      <link name="insan_4_bas">
-        <pose>3.5 1.0 1.5 0 0 0</pose>
-        <visual name="vb4"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
+  <!-- 4 ADET UZATILMIS KORIDOR DUVARI (24m x 5.0m, 2.7m Yukseklik, Supurgelikli) -->
+  <model name="duvar_kuzey">
+    <static>true</static>
+    <pose>0 2.5 1.35 0 0 0</pose>
+    <link name="link">
+      <collision name="col"><geometry><box><size>24.16 0.16 2.7</size></box></geometry></collision>
+      <visual name="duvar">
+        <geometry><box><size>24.16 0.16 2.7</size></box></geometry>
+        <material><ambient>0.54 0.56 0.59 1</ambient><diffuse>0.64 0.66 0.69 1</diffuse></material>
+      </visual>
+      <visual name="supurgelik">
+        <pose>0 -0.005 -1.25 0 0 0</pose>
+        <geometry><box><size>24.16 0.17 0.2</size></box></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 5. İNSAN (Mor T-shirt - İleri Sağ) -->
-      <link name="insan_5_govde">
-        <pose>3.5 -1.0 0.85 0 0 0</pose>
-        <collision name="c5"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v5"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.6 0.1 0.7 1</ambient><diffuse>0.6 0.1 0.7 1</diffuse></material></visual>
-      </link>
-      <link name="insan_5_bas">
-        <pose>3.5 -1.0 1.5 0 0 0</pose>
-        <visual name="vb5"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
+  <model name="duvar_guney">
+    <static>true</static>
+    <pose>0 -2.5 1.35 0 0 0</pose>
+    <link name="link">
+      <collision name="col"><geometry><box><size>24.16 0.16 2.7</size></box></geometry></collision>
+      <visual name="duvar">
+        <geometry><box><size>24.16 0.16 2.7</size></box></geometry>
+        <material><ambient>0.54 0.56 0.59 1</ambient><diffuse>0.64 0.66 0.69 1</diffuse></material>
+      </visual>
+      <visual name="supurgelik">
+        <pose>0 0.005 -1.25 0 0 0</pose>
+        <geometry><box><size>24.16 0.17 0.2</size></box></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
 
-      <- : Şasi ve tekerleklere ait STL çizimleri ( ,  ) 6. İNSAN (Turuncu T-shirt - Tam Ortada Derinlikte 5m) -->
-      <link name="insan_6_govde">
-        <pose>5.0 0.0 0.85 0 0 0</pose>
-        <collision name="c6"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry></collision>
-        <visual name="v6"><geometry><cylinder><radius>0.22</radius><length>0.9</length></cylinder></geometry><material><ambient>0.9 0.5 0.1 1</ambient><diffuse>0.9 0.5 0.1 1</diffuse></material></visual>
-      </link>
-      <link name="insan_6_bas">
-        <pose>5.0 0.0 1.5 0 0 0</pose>
-        <visual name="vb6"><geometry><sphere><radius>0.15</radius></sphere></geometry><material><ambient>0.9 0.7 0.6 1</ambient><diffuse>0.9 0.7 0.6 1</diffuse></material></visual>
-      </link>
-    </model>
+  <model name="duvar_dogu">
+    <static>true</static>
+    <pose>12.0 0 1.35 0 0 0</pose>
+    <link name="link">
+      <collision name="col"><geometry><box><size>0.16 5.0 2.7</size></box></geometry></collision>
+      <visual name="duvar">
+        <geometry><box><size>0.16 5.0 2.7</size></box></geometry>
+        <material><ambient>0.54 0.56 0.59 1</ambient><diffuse>0.64 0.66 0.69 1</diffuse></material>
+      </visual>
+      <visual name="supurgelik">
+        <pose>-0.005 0 -1.25 0 0 0</pose>
+        <geometry><box><size>0.17 5.0 0.2</size></box></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="duvar_bati">
+    <static>true</static>
+    <pose>-12.0 0 1.35 0 0 0</pose>
+    <link name="link">
+      <collision name="col"><geometry><box><size>0.16 5.0 2.7</size></box></geometry></collision>
+      <visual name="duvar">
+        <geometry><box><size>0.16 5.0 2.7</size></box></geometry>
+        <material><ambient>0.54 0.56 0.59 1</ambient><diffuse>0.64 0.66 0.69 1</diffuse></material>
+      </visual>
+      <visual name="supurgelik">
+        <pose>0.005 0 -1.25 0 0 0</pose>
+        <geometry><box><size>0.17 5.0 0.2</size></box></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_kuzey_1">
+    <static>true</static>
+    <pose>-7.5 2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 -0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 -0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 -0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_kuzey_2">
+    <static>true</static>
+    <pose>-2.5 2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 -0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 -0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 -0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_kuzey_3">
+    <static>true</static>
+    <pose>2.5 2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 -0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 -0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 -0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_kuzey_4">
+    <static>true</static>
+    <pose>7.5 2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 -0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 -0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 -0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_guney_1">
+    <static>true</static>
+    <pose>-7.5 -2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_guney_2">
+    <static>true</static>
+    <pose>-2.5 -2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_guney_3">
+    <static>true</static>
+    <pose>2.5 -2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_guney_4">
+    <static>true</static>
+    <pose>7.5 -2.41 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.08 0 0 0</pose>
+        <geometry><box><size>1.16 0.04 2.16</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat">
+        <pose>0 0.008 1.05 0 0 0</pose>
+        <geometry><box><size>1.02 0.045 2.08</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol">
+        <pose>0.40 0.04 0.98 0 0 0</pose>
+        <geometry><box><size>0.12 0.03 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="tabela">
+        <pose>0 0.035 1.65 0 0 0</pose>
+        <geometry><box><size>0.36 0.015 0.12</size></box></geometry>
+        <material><ambient>0.12 0.22 0.38 1</ambient><diffuse>0.16 0.30 0.50 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_dogu_cikis">
+    <static>true</static>
+    <pose>11.91 0 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.12 0 0 0</pose>
+        <geometry><box><size>0.04 1.96 2.24</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat_sol">
+        <pose>-0.008 0.46 1.09 0 0 0</pose>
+        <geometry><box><size>0.045 0.88 2.16</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kanat_sag">
+        <pose>-0.008 -0.46 1.09 0 0 0</pose>
+        <geometry><box><size>0.045 0.88 2.16</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol">
+        <pose>-0.04 0.08 0.98 0 0 0</pose>
+        <geometry><box><size>0.03 0.12 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag">
+        <pose>-0.04 -0.08 0.98 0 0 0</pose>
+        <geometry><box><size>0.03 0.12 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="exit_tabela">
+        <pose>-0.03 0 2.36 0 0 0</pose>
+        <geometry><box><size>0.02 0.48 0.16</size></box></geometry>
+        <material><ambient>0.10 0.55 0.20 1</ambient><diffuse>0.15 0.75 0.28 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  <model name="kapi_bati_giris">
+    <static>true</static>
+    <pose>-11.91 0 0 0 0 0</pose>
+    <link name="link">
+      <visual name="kasa">
+        <pose>0 0 1.12 0 0 0</pose>
+        <geometry><box><size>0.04 1.96 2.24</size></box></geometry>
+        <material><ambient>0.22 0.14 0.08 1</ambient><diffuse>0.30 0.19 0.11 1</diffuse></material>
+      </visual>
+      <visual name="kanat_sol">
+        <pose>0.008 0.46 1.09 0 0 0</pose>
+        <geometry><box><size>0.045 0.88 2.16</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kanat_sag">
+        <pose>0.008 -0.46 1.09 0 0 0</pose>
+        <geometry><box><size>0.045 0.88 2.16</size></box></geometry>
+        <material><ambient>0.52 0.32 0.16 1</ambient><diffuse>0.65 0.41 0.22 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol">
+        <pose>0.04 0.08 0.98 0 0 0</pose>
+        <geometry><box><size>0.03 0.12 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag">
+        <pose>0.04 -0.08 0.98 0 0 0</pose>
+        <geometry><box><size>0.03 0.12 0.03</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.88 0.88 0.90 1</diffuse></material>
+      </visual>
+      <visual name="exit_tabela">
+        <pose>0.03 0 2.36 0 0 0</pose>
+        <geometry><box><size>0.02 0.48 0.16</size></box></geometry>
+        <material><ambient>0.10 0.55 0.20 1</ambient><diffuse>0.15 0.75 0.28 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  
+  <model name="insan_1">
+    <static>false</static>
+    <pose>-8.0 -1.7 0 0 0 1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8316 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6132</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9710 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6144</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4682 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3694 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5888</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3694 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5888</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9871 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5222</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9871 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5222</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6860 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6860 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_1_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_1</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_1_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_2">
+    <static>false</static>
+    <pose>-4.8 1.7 0 0 0 -1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8128 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.5756</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9430 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.5952</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4306 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3602 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5704</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3602 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5704</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9576 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5059</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9576 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5059</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6647 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6647 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_2_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_2</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_2_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_3">
+    <static>false</static>
+    <pose>-1.6 -1.7 0 0 0 1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8504 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6508</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9990 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6336</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.5058 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3786 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.6072</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3786 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.6072</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 1.0165 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5386</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 1.0165 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5386</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.7072 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.7072 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_3_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_3</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_3_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_4">
+    <static>false</static>
+    <pose>1.6 1.7 0 0 0 -1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8222 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.5944</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9570 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6048</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4494 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3648 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5796</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3648 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5796</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9724 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5141</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9724 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5141</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6753 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6753 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_4_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_4</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_4_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_5">
+    <static>false</static>
+    <pose>4.8 -1.7 0 0 0 1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8410 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6320</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9850 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6240</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4870 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3740 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5980</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3740 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5980</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 1.0018 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5304</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 1.0018 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5304</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6966 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6966 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_5_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_5</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_5_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_6">
+    <static>false</static>
+    <pose>8.0 1.7 0 0 0 -1.57</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8034 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.5568</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9290 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.5856</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4118 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3556 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5612</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3556 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5612</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9429 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.4978</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9429 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.4978</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6540 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6540 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_6_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_6</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_6_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_7">
+    <static>false</static>
+    <pose>-9.5 1.1 0 0 0 0.0</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8269 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6038</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9640 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6096</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4588 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3671 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5842</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3671 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5842</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9797 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5182</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9797 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5182</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6806 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6806 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_7_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_7</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_7_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_8">
+    <static>false</static>
+    <pose>9.5 -1.1 0 0 0 3.14</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8457 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6414</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9920 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6288</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4964 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3763 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.6026</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3763 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.6026</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 1.0092 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5345</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 1.0092 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5345</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.7019 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.7019 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_8_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_8</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_8_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_9">
+    <static>false</static>
+    <pose>-6.5 -0.9 0 0 0 0.0</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8175 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.5850</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9500 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6000</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4400 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3625 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5750</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3625 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5750</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9650 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5100</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9650 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5100</length></cylinder></geometry>
+        <material><ambient>0.14 0.22 0.36 1</ambient><diffuse>0.18 0.28 0.46 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6700 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6700 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_9_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_9</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_9_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_10">
+    <static>false</static>
+    <pose>6.5 0.9 0 0 0 3.14</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8363 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6226</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9780 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6192</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4776 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3717 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5934</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3717 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5934</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9944 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5263</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9944 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5263</length></cylinder></geometry>
+        <material><ambient>0.22 0.24 0.27 1</ambient><diffuse>0.28 0.30 0.34 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6913 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6913 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_10_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_10</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_10_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_11">
+    <static>false</static>
+    <pose>-3.0 1.2 0 0 0 0.0</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8081 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.5662</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9360 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.5904</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4212 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3579 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5658</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3579 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5658</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9503 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5018</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9503 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5018</length></cylinder></geometry>
+        <material><ambient>0.38 0.14 0.16 1</ambient><diffuse>0.48 0.18 0.20 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6594 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6594 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_11_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_11</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_11_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
+
+  <model name="insan_12">
+    <static>false</static>
+    <pose>3.0 -1.2 0 0 0 3.14</pose>
+    <link name="base_link">
+      <gravity>true</gravity>
+      <inertial>
+        <pose>0 0 0.80 0 0 0</pose>
+        <mass>50.0</mass>
+        <inertia>
+          <ixx>100.0</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>100.0</iyy><iyz>0</iyz>
+          <izz>10.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Tek Parca Surtunmesiz Carpısma Silindiri (Devrilmez & Parcalanmaz) -->
+      <collision name="tek_collision">
+        <pose>0 0 0.8316 0 0 0</pose>
+        <geometry><cylinder><radius>0.23</radius><length>1.6132</length></cylinder></geometry>
+        <surface>
+          <friction>
+            <ode><mu>0.0</mu><mu2>0.0</mu2></ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- Tum Gorsel Uzuvlar Tek Link Icinde Kaynakli -->
+      <visual name="govde_vis">
+        <pose>0 0 0.9710 0 0 0</pose>
+        <geometry><cylinder><radius>0.19</radius><length>0.6144</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kafa_vis">
+        <pose>0 0 1.4682 0 0 0</pose>
+        <geometry><sphere><radius>0.17</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sol_vis">
+        <pose>0 0.095 0.3694 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5888</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="bacak_sag_vis">
+        <pose>0 -0.095 0.3694 0 0 0</pose>
+        <geometry><cylinder><radius>0.068</radius><length>0.5888</length></cylinder></geometry>
+        <material><ambient>0.14 0.16 0.20 1</ambient><diffuse>0.18 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sol_vis">
+        <pose>0.04 0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="ayak_sag_vis">
+        <pose>0.04 -0.095 0.0500 0 0 0</pose>
+        <geometry><box><size>0.21 0.095 0.05</size></box></geometry>
+        <material><ambient>0.10 0.10 0.11 1</ambient><diffuse>0.15 0.15 0.17 1</diffuse></material>
+      </visual>
+      <visual name="kol_sol_vis">
+        <pose>0 0.235 0.9871 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5222</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="kol_sag_vis">
+        <pose>0 -0.235 0.9871 0 0 0</pose>
+        <geometry><cylinder><radius>0.048</radius><length>0.5222</length></cylinder></geometry>
+        <material><ambient>0.16 0.28 0.22 1</ambient><diffuse>0.21 0.36 0.28 1</diffuse></material>
+      </visual>
+      <visual name="el_sol_vis">
+        <pose>0 0.235 0.6860 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+      <visual name="el_sag_vis">
+        <pose>0 -0.235 0.6860 0 0 0</pose>
+        <geometry><sphere><radius>0.048</radius></sphere></geometry>
+        <material><ambient>0.85 0.68 0.55 1</ambient><diffuse>0.90 0.72 0.58 1</diffuse></material>
+      </visual>
+    </link>
+    <plugin name="insan_12_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/insan_12</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <publish_rate>10</publish_rate>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <odometry_frame>insan_12_odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </model>
   </world>
 </sdf>
